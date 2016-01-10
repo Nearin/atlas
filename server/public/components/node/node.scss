@@ -1,0 +1,50 @@
+.node {
+
+  background-color: #0d3349;
+  box-shadow: 0px 7px 18px 0px rgba(0,0,0,0.75);
+  width: 100%;
+  height: 300px;
+  margin: 1rem;
+  border-radius: 3px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #000000;
+    padding: 3px;
+    margin-bottom: 0px;
+
+    .name {
+      color: #ffffff;
+      margin: 0px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1.2em;
+    }
+
+    .version {
+      text-align: right;
+      color: #ffffff;
+      font-family: 'Lato', sans-serif;
+      font-size: 1.2em;
+    }
+  }
+
+
+
+  .statusline {
+
+    height: 15px;
+    box-shadow: inset 0px 7px 18px -8px rgba(0,0,0,0.75);
+
+    &.ok {
+      background-color: #10b44e;
+    }
+    &.warning {
+      background-color: #bebd0e;
+    }
+    &.error {
+      background-color: #B40115;
+    }
+  }
+}

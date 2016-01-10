@@ -1,0 +1,13 @@
+
+
+
+<script data-main="/static/atlasModule.js" src="static/ext/requirejs/require.js"></script>
+
+
+   <div class="row">
+<!-- ko foreach: nodes -->
+       <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 text-center">
+            <node params="value: $data"></node>
+       </div>
+<!-- /ko -->
+   </div>
