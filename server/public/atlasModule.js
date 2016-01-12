@@ -1,13 +1,13 @@
 require(['static/require-config.js'], function() {
   require(['knockout', 'socket.io'],
-      function (ko, io) {
+      function (ko, io, justGage) {
 
         ko.components.register('node', {
           viewModel: { require: 'components/node/nodeModel' },
           template: { require: 'text!components/node/nodeTemplate.html' }
         });
         ko.components.register('dependency', {
-          viewModel: { require: 'components/dependency/dependencyeModel' },
+          viewModel: { require: 'components/dependency/dependencyModel' },
           template: { require: 'text!components/dependency/dependencyTemplate.html' }
         });
 
@@ -31,6 +31,8 @@ require(['static/require-config.js'], function() {
         });
 
         ko.applyBindings(model);
+
+
 
       return function () {};
   });

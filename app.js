@@ -92,9 +92,9 @@ function createFakeNodes() {
   var nodes = [];
 
 
-  nodes.push(createNodeJson('places-web', '1.0.0', 'OK', [createNodeJson('places-api', '1.0.0', 'OK', [])]));
+  nodes.push(createNodeJson('places-web', '1.0.0', 'OK', [createNodeJson('places-api', '1.0.0', 'OK', []), createNodeJson('publications-api', '1.0.0', 'OK', [])]));
   nodes.push(createNodeJson('places-api', '1.0.0', 'OK', []));
-  nodes.push(createNodeJson('publications-api', '1.0.0', 'OK', []));
+  nodes.push(createNodeJson('publications-web', '1.0.0', 'OK', [createNodeJson('publications-api', '1.0.0', 'OK', [])]));
   nodes.push(createNodeJson('publications-api', '1.0.0', 'OK', []));
 
   return {

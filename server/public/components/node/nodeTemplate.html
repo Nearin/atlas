@@ -1,11 +1,19 @@
 <div class="node">
-    <div class="title">
-        <span class="name" data-bind="text: model.name"></span>
-        <span class="version" data-bind="text: model.version"></span>
-    </div>
-    <div  class="statusline ok"></div>
-    <!-- ko foreach: $data.dependencies -->
-        <dependency params="value: $data"></dependency>
-    <!-- /ko -->
+    <div class="inner">
+        <div class="title">
+            <span class="name" data-bind="text: model.name"></span>
+            <span class="version" data-bind="text: model.version"></span>
+        </div>
+        <div  class="statusline ok"></div>
 
+        <div style="width: auto; height: 150px;">
+            <div data-bind="attr: { id: getId() }"></div>
+        </div>
+
+        <!-- ko foreach: model.dependencies -->
+            <dependency params="value: $data"></dependency>
+        <!-- /ko -->
+
+   </div>
+   <div class="end"></div>
 </div>

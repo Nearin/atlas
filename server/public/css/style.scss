@@ -1,5 +1,7 @@
+@import "colors";
 @import '../components/node/node';
+@import '../components/dependency/dependency';
 
 body {
-  background-color: #d2dfdf;
+  background-color: $backgroundColor;
 }

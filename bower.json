@@ -27,6 +27,7 @@
     "knockout": "knockoutjs#~3.4.0",
     "requirejs": "~2.1.22",
     "text": "requirejs-text#~2.0.14",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "justgage-toorshia": "https://github.com/toorshia/justgage.git#~1.2.1"
   }
 }
