@@ -1,6 +1,6 @@
 require(['static/require-config.js'], function() {
-  require(['knockout', 'socket.io'],
-      function (ko, io, justGage) {
+  require(['knockout', 'socket.io', 'jquery'],
+      function (ko, io, jquery) {
 
         ko.components.register('node', {
           viewModel: { require: 'components/node/nodeModel' },
@@ -30,9 +30,24 @@ require(['static/require-config.js'], function() {
           //model.nodes.push(nodes.nodes[0]);
         });
 
+
+        model.animateAdd = function(element) {
+          if (element.nodeType === 1) {
+            jquery(element).hide().fadeIn();
+          }
+        };
+
+        model.animateRemove = function(element) {
+          if (element.nodeType === 1) {
+            var animation = 'Animation Type Here';
+              jquery(element).addClass(animation).delay(500).queue(function (next) {
+              jquery(element).remove();
+              next();
+            });
+          }
+        };
+
         ko.applyBindings(model);
-
-
 
       return function () {};
   });
