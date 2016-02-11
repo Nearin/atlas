@@ -5,3 +5,48 @@
 body {
   background-color: $backgroundColor;
 }
+
+  div.flexnav {
+    display: flex;
+    align-items: center;
+    background-color: #4DD0E1;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 3rem;
+
+    .brandname {
+      padding-left: 20px;
+      flex: 2;
+      //font-family: 'Martel', serif;
+     // font-family: 'Roboto Condensed', serif;
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      font-size: 3em;
+    }
+
+    .icon {
+      flex: 1;
+    }
+
+    .search {
+      flex: 2;
+    }
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-top: -10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .items .item {
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    align-self: flex-start;
+  }

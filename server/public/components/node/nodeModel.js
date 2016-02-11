@@ -14,7 +14,12 @@ define(['knockout', 'justGauge'], function(ko, justGage) {
 
     console.log(id);
 
+    document.addEventListener("status", function(e) {
+      console.log("I got a message!");
+    }, false);
+
     var g;
+    var thiz = this;
 
     setTimeout(function() {
       console.log('Creating gauge for: ' + id);
@@ -24,7 +29,8 @@ define(['knockout', 'justGauge'], function(ko, justGage) {
         min: 0,
         max: 100,
         hideMinMax: true,
-        hideValue: true
+        hideValue: true,
+        relativeGaugeSize: true
       });
     },1000)
 

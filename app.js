@@ -120,3 +120,19 @@ function createFakeNodes2() {
     nodes: nodes
   }
 }
+
+function createTrouble() {
+
+  var nodes = [];
+
+  nodes.push(createNodeJson('publications-web', '1.0.0', 'OK', [createNodeJson('publications-api', '1.0.0', 'OK', [])]));
+  nodes.push(createNodeJson('publications-api', '1.0.0', 'OK', []));
+  nodes.push(createNodeJson('a-api', '1.0.0', 'OK', []));
+  nodes.push(createNodeJson('b-api', '1.0.0', 'OK', []));
+  nodes.push(createNodeJson('c-api', '1.0.0', 'OK', []));
+
+  return {
+    nodes: nodes
+  }
+}
+

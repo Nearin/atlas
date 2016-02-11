@@ -1,5 +1,5 @@
 require(['static/require-config.js'], function() {
-  require(['knockout', 'socket.io', 'jquery'],
+  require(['knockout', 'socket.io', 'jquery', 'knockout-projections'],
       function (ko, io, jquery) {
 
         ko.components.register('node', {
@@ -15,19 +15,21 @@ require(['static/require-config.js'], function() {
 
         model.nodes = ko.observableArray();
 
-        model.nodes.subscribe(function(newValue) {
-          console.log("Model is:  " + model.nodes()[0].name);
-        });
+        //model.nodes.subscribe(function(newValue) {
+        //  console.log("Model is:  " + model.nodes()[0].name);
+        //});
 
         model.name = 'Atlas';
 
         var socket = io();
+
         socket.emit('message', { user: 'me', msg: 'whazzzup from CLIENT?' });
 
-        socket.on('nodes', function(nodes){
+        socket.on('nodes', function(nodes) {
           console.log(nodes);
           nodes.nodes.forEach((node) => model.nodes.push(node));
-          //model.nodes.push(nodes.nodes[0]);
+
+          // Gör en metod som gör om fälten till observables.
         });
 
 
@@ -39,15 +41,39 @@ require(['static/require-config.js'], function() {
 
         model.animateRemove = function(element) {
           if (element.nodeType === 1) {
-            var animation = 'Animation Type Here';
-              jquery(element).addClass(animation).delay(500).queue(function (next) {
-              jquery(element).remove();
-              next();
-            });
+            jquery(element).show().fadeOut();
           }
         };
 
+        model.currentFilter = ko.observable();
+
+        this.filteredNodes = ko.pureComputed(function() {
+          if(!model.currentFilter() || model.currentFilter().length === 0) {
+            return model.nodes();
+          } else {
+
+            var event = new CustomEvent(
+                "status",
+                {
+                  detail: {
+                    message: "Hello World!",
+                    time: new Date(),
+                  },
+                  bubbles: true,
+                  cancelable: true
+                }
+            );
+
+
+            document.getElementById("body").dispatchEvent(event);
+
+
+            return model.nodes().filter(function(x) { return x.name.indexOf(model.currentFilter()) >= 0 });
+          }
+        }, model);
+
         ko.applyBindings(model);
+
 
       return function () {};
   });
