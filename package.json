@@ -4,7 +4,8 @@
   "description": "A discovery service running on node",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_PATH=`pwd` mocha --recursive ./test/"
+    "test": "NODE_PATH=`pwd` mocha --recursive ./test/",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 var express = require('express');
 var sassMiddleware = require('node-sass-middleware');
 var path = require('path');
-var app = express();
+var app = require('server/server').expressApp;
 var rootPath = path.dirname(require.main.filename);
 
 module.exports = (function() {

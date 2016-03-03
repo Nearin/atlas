@@ -1,57 +1,35 @@
 var express = require('express')
-var app = require('express')();
-var server = require('http').Server(app);
-
-var sassMiddleware = require('node-sass-middleware');
 var path = require('path');
-var rootPath = path.dirname(require.main.filename);
-
-
-//var sass = require('./server/middleware/sass');
-
-
-  var cssPath = path.join(rootPath, 'server/public/css');
-
-  console.log("Running SASS Middleware on " + cssPath);
-  console.log("Src: " + path.join(__dirname, "/server/public/css"));
-
-  app.use(sassMiddleware({
-    src: path.join(__dirname, "server/public/css"),
-    debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/static/css/',
-    force: true
-  }));
+var server = require('server/server');
 
 var exphbs = require('express-handlebars');
 
-app.set('views', __dirname + '/server/views');
-app.set('layouts', __dirname + '/server/views/layouts');
-app.set('partials', __dirname + '/server/views/partials');
+server.expressApp.set('views', __dirname + '/server/views');
+server.expressApp.set('layouts', __dirname + '/server/views/layouts');
+server.expressApp.set('partials', __dirname + '/server/views/partials');
 
-app.engine('handlebars', exphbs({
+server.expressApp.engine('handlebars', exphbs({
     defaultLayout: 'default',
     extname: 'handlebars',
-    layoutsDir: app.settings.layouts,
-    partialsDir: app.settings.partials,
+    layoutsDir: server.expressApp.settings.layouts,
+    partialsDir: server.expressApp.settings.partials
     }
 ));
 
-app.get('/', function (req, res) {
-    res.render('index');
-  //res.json({json: 'Hello World!!!'});
-});
 
-app.set('view engine', 'handlebars');
+server.expressApp.set('view engine', 'handlebars');
 
-app.use('/static', express.static('server/public'));
+server.expressApp.use('/static', express.static('server/public'));
+
+require('server/controllers/frontendController');
+require('server/middleware/sass');
 
 initSocketIo(server);
 
 server.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
-  console.log('Atlas listening at http://%s:%s', host, port);
+  console.log('Gossip listening at http://%s:%s', host, port);
 });
 
 

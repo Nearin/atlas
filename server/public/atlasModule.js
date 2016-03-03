@@ -11,6 +11,7 @@ require(['static/require-config.js'], function() {
           template: { require: 'text!components/dependency/dependencyTemplate.html' }
         });
 
+
         var model = {};
 
         model.nodes = ko.observableArray();
