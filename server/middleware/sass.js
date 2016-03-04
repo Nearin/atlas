@@ -11,14 +11,14 @@ module.exports = (function() {
   console.log(__filename, "Running SASS Middleware on " + cssPath);
 
   app.use(sassMiddleware({
-    /* Options */
-    src: path.join(__dirname, "public/css"),
-    dest: path.join(__dirname, 'public/css'),
+    src: "server/public/css",
+    dest: 'server/public/css',
     debug: true,
+    force: true,
     outputStyle: 'compressed',
     prefix:  '/static/css/'
   }));
 
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/static',express.static(path.join('server/public')));
 
 })();

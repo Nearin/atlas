@@ -30,6 +30,7 @@
     "bootstrap": "~3.3.6",
     "justgage-toorshia": "https://github.com/toorshia/justgage.git#~1.2.1",
     "jquery": "~2.2.0",
-    "knockout-projections": "~1.1.0"
+    "knockout-projections": "~1.1.0",
+    "underscore": "~1.8.3"
   }
 }

@@ -1,8 +1,12 @@
 define(['knockout', 'justGauge'], function(ko, justGage) {
 
   function NodeModel(params) {
-    this.model = params.value;
-    console.log('Node model: ' + JSON.stringify(this.model ));
+    this.model = {
+      "name": params.value.name,
+      "version": params.value.version,
+      "status": ko.observable(params.value.status),
+      dependencies: params.value.dependencies
+    };
   }
 
   NodeModel.prototype.nrOfDepedencies = function() {
@@ -10,19 +14,25 @@ define(['knockout', 'justGauge'], function(ko, justGage) {
   };
 
   NodeModel.prototype.getId = function() {
+    var self =  this;
     var id = 'gauge_' + this.model.name;
 
-    console.log(id);
-
-    document.addEventListener("status", function(e) {
-      console.log("I got a message!");
+    document.body.addEventListener(this.model.name + '-' + this.model.version, function(event) {
+      handleMessage(event.detail)
     }, false);
+
+    function handleMessage(msg) {
+      if(msg) {
+        if(msg.status) {
+          self.model.status(msg.status);
+        }
+      }
+    }
 
     var g;
     var thiz = this;
 
     setTimeout(function() {
-      console.log('Creating gauge for: ' + id);
       g = new JustGage({
         id: id,
         value: getRandomInt(0, 100),
@@ -40,11 +50,6 @@ define(['knockout', 'justGauge'], function(ko, justGage) {
 
     return id;
   };
-
-  //
-  //LikeWidgetViewModel.prototype.dislike = function() {
-  //  this.chosenValue('dislike');
-  //};
 
   return NodeModel;
 

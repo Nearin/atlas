@@ -6,7 +6,8 @@ require.config({
     "socket.io": "ext/socket.io-client/socket.io",
     "justGauge": "ext/justgage-toorshia/justgage",
     "jquery": "ext/jquery/dist/jquery.min",
-    "knockout-projections": "ext/knockout-projections/dist/knockout-projections.min"
+    "knockout-projections": "ext/knockout-projections/dist/knockout-projections.min",
+    "underscore": "ext/underscore/underscore-min"
   },
 
   shim: {

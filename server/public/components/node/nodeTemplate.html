@@ -4,7 +4,7 @@
             <span class="name" data-bind="text: model.name"></span>
             <span class="version" data-bind="text: model.version"></span>
         </div>
-        <div  class="statusline ok"></div>
+        <div class="statusline" data-bind="css: {ok: model.status() === 'OK', warning: model.status() === 'WARNING', error: model.status() === 'ERROR'}"></div>
 
         <div style="width: auto; height: 150px;">
             <div data-bind="attr: { id: getId() }"></div>

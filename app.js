@@ -16,10 +16,7 @@ server.expressApp.engine('handlebars', exphbs({
     }
 ));
 
-
 server.expressApp.set('view engine', 'handlebars');
-
-server.expressApp.use('/static', express.static('server/public'));
 
 require('server/controllers/frontendController');
 require('server/middleware/sass');
@@ -45,7 +42,12 @@ function initSocketIo(server) {
 
         setTimeout(function(){
           socket.emit('nodes', createFakeNodes2());
+        }, 2000);
+
+        setTimeout(function(){
+          socket.emit('message', {to: 'places-web-1.0.0', data: { status : 'WARNING'}});
         }, 5000);
+
       });
   });
 
@@ -75,12 +77,11 @@ function createFakeNodes() {
 
 
   nodes.push(createNodeJson('places-web', '1.0.0', 'OK', [createNodeJson('places-api', '1.0.0', 'OK', []), createNodeJson('publications-api', '1.0.0', 'OK', [])]));
-  nodes.push(createNodeJson('places-api', '1.0.0', 'OK', []));
+  nodes.push(createNodeJson('places-api', '1.0.0', 'WARNING', []));
 
   return {
     nodes:nodes
   }
-
 }
 
 function createFakeNodes2() {
@@ -88,7 +89,7 @@ function createFakeNodes2() {
   var nodes = [];
 
 
-  nodes.push(createNodeJson('publications-web', '1.0.0', 'OK', [createNodeJson('publications-api', '1.0.0', 'OK', [])]));
+  nodes.push(createNodeJson('publications-web', '1.0.0', 'ERROR', [createNodeJson('publications-api', '1.0.0', 'OK', [])]));
   nodes.push(createNodeJson('publications-api', '1.0.0', 'OK', []));
   nodes.push(createNodeJson('a-api', '1.0.0', 'OK', []));
   nodes.push(createNodeJson('b-api', '1.0.0', 'OK', []));

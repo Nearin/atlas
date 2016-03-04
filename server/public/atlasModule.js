@@ -1,6 +1,6 @@
 require(['static/require-config.js'], function() {
-  require(['knockout', 'socket.io', 'jquery', 'knockout-projections'],
-      function (ko, io, jquery) {
+  require(['knockout', 'socket.io', 'jquery', 'underscore', 'knockout-projections'],
+      function (ko, io, jquery, _) {
 
         ko.components.register('node', {
           viewModel: { require: 'components/node/nodeModel' },
@@ -10,6 +10,11 @@ require(['static/require-config.js'], function() {
           viewModel: { require: 'components/dependency/dependencyModel' },
           template: { require: 'text!components/dependency/dependencyTemplate.html' }
         });
+
+        /**
+         *  TODO
+         *
+         */
 
 
         var model = {};
@@ -26,13 +31,16 @@ require(['static/require-config.js'], function() {
 
         socket.emit('message', { user: 'me', msg: 'whazzzup from CLIENT?' });
 
-        socket.on('nodes', function(nodes) {
-          console.log(nodes);
-          nodes.nodes.forEach((node) => model.nodes.push(node));
+        var nodes = [];
 
-          // Gör en metod som gör om fälten till observables.
+        socket.on('nodes', function(nodes) {
+          _.difference(nodes.nodes, model.nodes).forEach(node => model.nodes.push(node));
         });
 
+        socket.on('message', function(msg) {
+          var event = new CustomEvent(msg.to , { 'detail': msg.data});
+          document.body.dispatchEvent(event);
+        });
 
         model.animateAdd = function(element) {
           if (element.nodeType === 1) {
